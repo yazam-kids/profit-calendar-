@@ -1,101 +1,945 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Yazam Kids Profit Calendar</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7faff;color:#123b67}
-.wrap{max-width:1000px;margin:auto;padding:28px 18px 45px}header{text-align:center;margin-bottom:22px}
-.brand{font-size:40px;font-weight:800;letter-spacing:-2px}.brand span:nth-child(1){color:#123b67}.brand span:nth-child(2){color:#159ed8}.brand span:nth-child(3){color:#5db52b}.brand span:nth-child(4){color:#f47b20}.brand span:nth-child(5){color:#7548b9}.brand span:nth-child(6){color:#13a6ad}.brand span:nth-child(7){color:#e84d86}.brand span:nth-child(8){color:#f6b918}.brand span:nth-child(9){color:#123b67}
-h1{margin:4px 0 0;font-size:30px}.subtitle{color:#5d7289;margin-top:8px}
-.card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(18,59,103,.1);margin-bottom:20px}
-.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary-box{background:#f4f8fc;border-radius:17px;padding:18px}.summary-label{color:#61778e;font-weight:700;font-size:14px}.summary-value{font-size:30px;font-weight:800;margin-top:5px}.green{color:#249447}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.month-title{font-size:25px;font-weight:800}.buttons{display:flex;gap:8px}
-button{border:0;background:#123b67;color:#fff;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}.today-btn{background:#159ed8}
-.weekdays,.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.weekday{text-align:center;font-weight:800;color:#61778e;padding:7px 2px;font-size:13px}
-.day{min-height:105px;background:#f4f8fc;border-radius:13px;padding:9px;border:2px solid transparent}.day.empty{background:transparent}.day.today{border-color:#159ed8}.day.has-profit{background:#eaf8ef}
-.day-number{font-weight:800;margin-bottom:7px}.profit-input{width:100%;border:2px solid #dbe7f2;border-radius:9px;padding:8px 6px;font-size:15px;outline:none}.profit-input:focus{border-color:#159ed8}.profit-note{font-size:11px;color:#7b8da0;margin-top:5px}.day.has-profit .profit-note{color:#249447;font-weight:700}
-.clear-btn{margin-top:14px;background:#eef3f8;color:#123b67}.help{color:#5d7289;font-size:14px;line-height:1.5;margin:0}
-@media(max-width:700px){.summary{grid-template-columns:1fr}.brand{font-size:32px}.card{padding:16px}.calendar-head{align-items:flex-start;flex-direction:column}.day{min-height:88px;padding:6px}.profit-input{font-size:13px;padding:7px 4px}.weekday{font-size:11px}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7faff;
+  color: #123b67;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: auto;
+  padding: 28px 18px 45px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.brand {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.brand span:nth-child(1) { color: #123b67; }
+.brand span:nth-child(2) { color: #159ed8; }
+.brand span:nth-child(3) { color: #5db52b; }
+.brand span:nth-child(4) { color: #f47b20; }
+.brand span:nth-child(5) { color: #7548b9; }
+.brand span:nth-child(6) { color: #13a6ad; }
+.brand span:nth-child(7) { color: #e84d86; }
+.brand span:nth-child(8) { color: #f6b918; }
+.brand span:nth-child(9) { color: #123b67; }
+
+h1 {
+  margin: 4px 0 0;
+  font-size: 30px;
+}
+
+.subtitle {
+  color: #5d7289;
+  margin-top: 8px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(18, 59, 103, .1);
+  margin-bottom: 20px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.summary-box {
+  background: #f4f8fc;
+  border-radius: 17px;
+  padding: 18px;
+}
+
+.summary-label {
+  color: #61778e;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.summary-value {
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
+.green {
+  color: #249447;
+}
+
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.month-title {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  background: #123b67;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.today-btn {
+  background: #159ed8;
+}
+
+.weekdays,
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 7px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 800;
+  color: #61778e;
+  padding: 7px 2px;
+  font-size: 13px;
+}
+
+.day {
+  min-height: 105px;
+  background: #f4f8fc;
+  border-radius: 13px;
+  padding: 9px;
+  border: 2px solid transparent;
+}
+
+.day.empty {
+  background: transparent;
+}
+
+.day.today {
+  border-color: #159ed8;
+}
+
+.day.has-profit {
+  background: #eaf8ef;
+}
+
+.day-number {
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.profit-input {
+  width: 100%;
+  border: 2px solid #dbe7f2;
+  border-radius: 9px;
+  padding: 8px 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+.profit-input:focus {
+  border-color: #159ed8;
+}
+
+.profit-note {
+  font-size: 11px;
+  color: #7b8da0;
+  margin-top: 5px;
+}
+
+.day.has-profit .profit-note {
+  color: #249447;
+  font-weight: 700;
+}
+
+.clear-btn {
+  margin-top: 14px;
+  background: #eef3f8;
+  color: #123b67;
+}
+
+.help {
+  color: #5d7289;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    font-size: 32px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .calendar-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .day {
+    min-height: 88px;
+    padding: 6px;
+  }
+
+  .profit-input {
+    font-size: 13px;
+    padding: 7px 4px;
+  }
+
+  .weekday {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
+
 <header>
-<div class="brand"><span>Y</span><span>a</span><span>z</span><span>a</span><span>m</span><span>K</span><span>i</span><span>d</span><span>s</span></div>
-<h1>My Profit Calendar</h1>
-<div class="subtitle">Write down how much money you made each day!</div>
+
+  <div class="brand">
+    <span>Y</span><span>a</span><span>z</span><span>a</span><span>m</span><span>K</span><span>i</span><span>d</span><span>s</span>
+  </div>
+
+  <h1>My Profit Calendar</h1>
+
+  <div class="subtitle">
+    Write down how much money you made each day!
+  </div>
+
 </header>
 
-<section class="card"><div class="summary">
-<div class="summary-box"><div class="summary-label">Money made this month</div><div id="monthTotal" class="summary-value green">$0.00</div></div>
-<div class="summary-box"><div class="summary-label">Money made this year</div><div id="yearTotal" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Money made all together</div><div id="allTotal" class="summary-value">$0.00</div></div>
-</div></section>
+
+<!-- TOTALS -->
 
 <section class="card">
-<div class="calendar-head"><div id="monthTitle" class="month-title"></div><div class="buttons">
-<button onclick="changeMonth(-1)">← Back</button><button class="today-btn" onclick="goToday()">Today</button><button onclick="changeMonth(1)">Next →</button>
-</div></div>
-<div class="weekdays"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div></div>
-<div id="calendar" class="calendar"></div>
-<button class="clear-btn" onclick="clearMonth()">Clear this month</button>
+
+  <div class="summary">
+
+    <div class="summary-box">
+      <div class="summary-label">
+        Money made this week
+      </div>
+      <div id="weekTotal" class="summary-value green">
+        $0.00
+      </div>
+    </div>
+
+
+    <div class="summary-box">
+      <div class="summary-label">
+        Money made this month
+      </div>
+      <div id="monthTotal" class="summary-value green">
+        $0.00
+      </div>
+    </div>
+
+
+    <div class="summary-box">
+      <div class="summary-label">
+        Money made this year
+      </div>
+      <div id="yearTotal" class="summary-value">
+        $0.00
+      </div>
+    </div>
+
+
+    <div class="summary-box">
+      <div class="summary-label">
+        Money made all together
+      </div>
+      <div id="allTotal" class="summary-value">
+        $0.00
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
-<section class="card"><p class="help"><strong>How to use it:</strong> Find a day and type in the money you made that day. Your totals update automatically. Your numbers are saved on this device so you can come back later.</p></section>
+
+<!-- CALENDAR -->
+
+<section class="card">
+
+  <div class="calendar-head">
+
+    <div
+      id="monthTitle"
+      class="month-title">
+    </div>
+
+
+    <div class="buttons">
+
+      <button onclick="changeMonth(-1)">
+        ← Back
+      </button>
+
+      <button
+        class="today-btn"
+        onclick="goToday()">
+        Today
+      </button>
+
+      <button onclick="changeMonth(1)">
+        Next →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- DAYS OF WEEK -->
+
+  <div class="weekdays">
+
+    <div class="weekday">Sun</div>
+    <div class="weekday">Mon</div>
+    <div class="weekday">Tue</div>
+    <div class="weekday">Wed</div>
+    <div class="weekday">Thu</div>
+    <div class="weekday">Fri</div>
+    <div class="weekday">Sat</div>
+
+  </div>
+
+
+  <!-- CALENDAR DAYS -->
+
+  <div
+    id="calendar"
+    class="calendar">
+  </div>
+
+
+  <button
+    class="clear-btn"
+    onclick="clearMonth()">
+
+    Clear this month
+
+  </button>
+
+</section>
+
+
+<!-- HELP -->
+
+<section class="card">
+
+  <p class="help">
+
+    <strong>How to use it:</strong>
+
+    Find a day and type in the money you made that day.
+    Your weekly, monthly, yearly, and all-time totals update automatically.
+    Your numbers are saved on this device so you can come back later.
+
+  </p>
+
+</section>
+
 </div>
 
+
 <script>
-const STORAGE_KEY="yazamKidsProfitCalendar";
-let currentDate=new Date();
-let profits=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
 
-function money(n){return Number(n||0).toLocaleString("en-US",{style:"currency",currency:"USD"})}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(profits))}
-function dateKey(y,m,d){return y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0")}
+const STORAGE_KEY = "yazamKidsProfitCalendar";
 
-function render(){
- const y=currentDate.getFullYear(),m=currentDate.getMonth();
- document.getElementById("monthTitle").textContent=currentDate.toLocaleString("en-US",{month:"long",year:"numeric"});
- const cal=document.getElementById("calendar");cal.innerHTML="";
- const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
- for(let i=0;i<first;i++){let e=document.createElement("div");e.className="day empty";cal.appendChild(e)}
- const today=new Date();
- for(let d=1;d<=days;d++){
-  const key=dateKey(y,m,d),value=profits[key]??"";
-  const cell=document.createElement("div");cell.className="day";
-  if(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate())cell.classList.add("today");
-  if(Number(value)>0)cell.classList.add("has-profit");
-  const num=document.createElement("div");num.className="day-number";num.textContent=d;
-  const input=document.createElement("input");input.className="profit-input";input.type="number";input.min="0";input.step="0.01";input.placeholder="$0";input.value=value;
-  input.addEventListener("input",()=>{
-   if(input.value==="")delete profits[key];else profits[key]=Math.max(0,Number(input.value)||0);
-   save();updateTotals();cell.classList.toggle("has-profit",Number(input.value)>0);
-  });
-  const note=document.createElement("div");note.className="profit-note";note.textContent=Number(value)>0?"Great job! 🎉":"Daily profit";
-  cell.append(num,input,note);cal.appendChild(cell);
- }
- updateTotals();
+let currentDate = new Date();
+
+let profits = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "{}"
+);
+
+
+/* FORMAT MONEY */
+
+function money(n) {
+
+  return Number(n || 0).toLocaleString(
+    "en-US",
+    {
+      style: "currency",
+      currency: "USD"
+    }
+  );
+
 }
 
-function updateTotals(){
- const y=currentDate.getFullYear(),m=currentDate.getMonth();let monthTotal=0,yearTotal=0,allTotal=0;
- Object.entries(profits).forEach(([key,value])=>{
-  const amount=Number(value)||0;allTotal+=amount;if(p[0]===y)yearTotal+=amount;
-  const p=key.split("-").map(Number);if(p[0]===y&&p[1]===m+1)monthTotal+=amount;
- });
- document.getElementById("monthTotal").textContent=money(monthTotal);
- document.getElementById("yearTotal").textContent=money(yearTotal);
- document.getElementById("allTotal").textContent=money(allTotal);
+
+/* SAVE PROFITS */
+
+function save() {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(profits)
+  );
+
 }
-function changeMonth(n){currentDate=new Date(currentDate.getFullYear(),currentDate.getMonth()+n,1);render()}
-function goToday(){currentDate=new Date();render()}
-function clearMonth(){
- const y=currentDate.getFullYear(),m=currentDate.getMonth()+1;
- Object.keys(profits).forEach(k=>{const p=k.split("-");if(Number(p[0])===y&&Number(p[1])===m)delete profits[k]});
- save();render();
+
+
+/* CREATE DATE KEY */
+
+function dateKey(y, m, d) {
+
+  return (
+    y +
+    "-" +
+    String(m + 1).padStart(2, "0") +
+    "-" +
+    String(d).padStart(2, "0")
+  );
+
 }
+
+
+/* RENDER CALENDAR */
+
+function render() {
+
+  const y = currentDate.getFullYear();
+
+  const m = currentDate.getMonth();
+
+
+  /* MONTH TITLE */
+
+  document.getElementById(
+    "monthTitle"
+  ).textContent =
+    currentDate.toLocaleString(
+      "en-US",
+      {
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+
+  const cal =
+    document.getElementById("calendar");
+
+  cal.innerHTML = "";
+
+
+  /* FIND FIRST DAY AND NUMBER OF DAYS */
+
+  const first =
+    new Date(y, m, 1).getDay();
+
+  const days =
+    new Date(y, m + 1, 0).getDate();
+
+
+  /* EMPTY SPACES BEFORE FIRST DAY */
+
+  for (
+    let i = 0;
+    i < first;
+    i++
+  ) {
+
+    const emptyDay =
+      document.createElement("div");
+
+    emptyDay.className =
+      "day empty";
+
+    cal.appendChild(emptyDay);
+
+  }
+
+
+  const today =
+    new Date();
+
+
+  /* CREATE EVERY DAY */
+
+  for (
+    let d = 1;
+    d <= days;
+    d++
+  ) {
+
+    const key =
+      dateKey(y, m, d);
+
+    const value =
+      profits[key] ?? "";
+
+
+    const cell =
+      document.createElement("div");
+
+    cell.className = "day";
+
+
+    /* HIGHLIGHT TODAY */
+
+    if (
+      y === today.getFullYear() &&
+      m === today.getMonth() &&
+      d === today.getDate()
+    ) {
+
+      cell.classList.add(
+        "today"
+      );
+
+    }
+
+
+    /* HIGHLIGHT DAYS WITH PROFIT */
+
+    if (
+      Number(value) > 0
+    ) {
+
+      cell.classList.add(
+        "has-profit"
+      );
+
+    }
+
+
+    /* DAY NUMBER */
+
+    const num =
+      document.createElement("div");
+
+    num.className =
+      "day-number";
+
+    num.textContent = d;
+
+
+    /* PROFIT INPUT */
+
+    const input =
+      document.createElement("input");
+
+    input.className =
+      "profit-input";
+
+    input.type = "number";
+
+    input.min = "0";
+
+    input.step = "0.01";
+
+    input.placeholder = "$0";
+
+    input.value = value;
+
+
+    /* DAILY NOTE */
+
+    const note =
+      document.createElement("div");
+
+    note.className =
+      "profit-note";
+
+    note.textContent =
+      Number(value) > 0
+        ? "Great job! 🎉"
+        : "Daily profit";
+
+
+    /* UPDATE WHEN MONEY IS TYPED */
+
+    input.addEventListener(
+      "input",
+      () => {
+
+        if (
+          input.value === ""
+        ) {
+
+          delete profits[key];
+
+        } else {
+
+          profits[key] =
+            Math.max(
+              0,
+              Number(input.value) || 0
+            );
+
+        }
+
+
+        /* SAVE */
+
+        save();
+
+
+        /* UPDATE TOTALS */
+
+        updateTotals();
+
+
+        /* UPDATE DAY COLOR */
+
+        const amount =
+          Number(input.value) || 0;
+
+
+        cell.classList.toggle(
+          "has-profit",
+          amount > 0
+        );
+
+
+        /* UPDATE MESSAGE */
+
+        note.textContent =
+          amount > 0
+            ? "Great job! 🎉"
+            : "Daily profit";
+
+      }
+    );
+
+
+    /* ADD EVERYTHING TO DAY */
+
+    cell.append(
+      num,
+      input,
+      note
+    );
+
+
+    cal.appendChild(cell);
+
+  }
+
+
+  /* UPDATE TOTALS */
+
+  updateTotals();
+
+}
+
+
+/* UPDATE ALL TOTALS */
+
+function updateTotals() {
+
+  const y =
+    currentDate.getFullYear();
+
+  const m =
+    currentDate.getMonth();
+
+
+  let weekTotal = 0;
+
+  let monthTotal = 0;
+
+  let yearTotal = 0;
+
+  let allTotal = 0;
+
+
+  /*
+    FIND THE CURRENT WEEK
+
+    Week starts Sunday
+    Week ends Saturday
+  */
+
+  const today =
+    new Date();
+
+
+  const startOfWeek =
+    new Date(today);
+
+
+  startOfWeek.setDate(
+    today.getDate() -
+    today.getDay()
+  );
+
+
+  startOfWeek.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  const endOfWeek =
+    new Date(startOfWeek);
+
+
+  endOfWeek.setDate(
+    startOfWeek.getDate() +
+    6
+  );
+
+
+  endOfWeek.setHours(
+    23,
+    59,
+    59,
+    999
+  );
+
+
+  /*
+    GO THROUGH EVERY
+    SAVED PROFIT
+  */
+
+  Object.entries(profits).forEach(
+    ([key, value]) => {
+
+
+      const amount =
+        Number(value) || 0;
+
+
+      /* SPLIT DATE */
+
+      const p =
+        key
+          .split("-")
+          .map(Number);
+
+
+      const profitYear =
+        p[0];
+
+      const profitMonth =
+        p[1] - 1;
+
+      const profitDay =
+        p[2];
+
+
+      const profitDate =
+        new Date(
+          profitYear,
+          profitMonth,
+          profitDay
+        );
+
+
+      /* ALL-TIME TOTAL */
+
+      allTotal += amount;
+
+
+      /* YEARLY TOTAL */
+
+      if (
+        profitYear === y
+      ) {
+
+        yearTotal += amount;
+
+      }
+
+
+      /* MONTHLY TOTAL */
+
+      if (
+        profitYear === y &&
+        profitMonth === m
+      ) {
+
+        monthTotal += amount;
+
+      }
+
+
+      /* WEEKLY TOTAL */
+
+      if (
+        profitDate >=
+          startOfWeek &&
+        profitDate <=
+          endOfWeek
+      ) {
+
+        weekTotal += amount;
+
+      }
+
+    }
+  );
+
+
+  /* SHOW WEEK TOTAL */
+
+  document.getElementById(
+    "weekTotal"
+  ).textContent =
+    money(weekTotal);
+
+
+  /* SHOW MONTH TOTAL */
+
+  document.getElementById(
+    "monthTotal"
+  ).textContent =
+    money(monthTotal);
+
+
+  /* SHOW YEAR TOTAL */
+
+  document.getElementById(
+    "yearTotal"
+  ).textContent =
+    money(yearTotal);
+
+
+  /* SHOW ALL-TIME TOTAL */
+
+  document.getElementById(
+    "allTotal"
+  ).textContent =
+    money(allTotal);
+
+}
+
+
+/* CHANGE MONTH */
+
+function changeMonth(n) {
+
+  currentDate =
+    new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + n,
+      1
+    );
+
+
+  render();
+
+}
+
+
+/* GO TO TODAY */
+
+function goToday() {
+
+  currentDate =
+    new Date();
+
+
+  render();
+
+}
+
+
+/* CLEAR CURRENT MONTH */
+
+function clearMonth() {
+
+  const y =
+    currentDate.getFullYear();
+
+
+  const m =
+    currentDate.getMonth() + 1;
+
+
+  Object.keys(profits).forEach(
+    (key) => {
+
+
+      const p =
+        key
+          .split("-")
+          .map(Number);
+
+
+      if (
+        p[0] === y &&
+        p[1] === m
+      ) {
+
+        delete profits[key];
+
+      }
+
+    }
+  );
+
+
+  /* SAVE CHANGES */
+
+  save();
+
+
+  /* REBUILD CALENDAR */
+
+  render();
+}
+/* START CALENDAR */
+
 render();
 </script>
+
 </body>
 </html>
+```
